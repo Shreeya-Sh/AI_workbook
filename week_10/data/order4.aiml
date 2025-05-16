@@ -1,0 +1,19 @@
+<aiml>
+
+<category>
+ <pattern>I WANT MORE HELP</pattern>
+  <template>
+    We are sorry that you are not satisfied. 
+    Please use the email address below to contact the right team who can give you more help.
+    <br/>
+    <condition name="status">
+      <li value="transit">transit.enquiries@acme.com</li>
+      <li value="delivered">missing.delivery@acme.com</li>
+      <li value="not_recognised">lost.orders@acme.com</li>
+      <li value="out_of_stock">stock.info@acme.com</li>
+      <li>customer.service@acme.com</li> <!-- fallback/default -->
+    </condition>
+   </template>
+</category>
+
+</aiml>

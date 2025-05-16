@@ -1,0 +1,91 @@
+<aiml>
+  <!-- Definitions with Context -->
+  <category>
+    <!--Uses wildcard * to handle "WHAT IS..." questions-->
+    <pattern>WHAT IS *</pattern>
+    <template>
+    <!-- uses <think> and <set> tag to save concept and topic as a variable -->
+      <think><set name="concept"><lowercase><star/></lowercase></set></think>
+    <!-- uses <condition> tag to match the correct value-->
+      <condition name="concept">
+        <li value="long-term knowledge"><think><set name="topic">long-term knowledge</set></think>Long-term knowledge is valid over a period of time.</li>
+        <li value="short-term knowledge"><think><set name="topic">short-term generic knowledge</set></think>Short-term knowledge is only valid for a particular situation or run of a programme.</li>
+        <li value="generic knowledge"><think><set name="topic">generic knowledge</set></think>Generic knowledge is relevant to more than one application or domain.</li>
+        <li value="domain-specific knowledge"><think><set name="topic">domain-specific knowledge</set></think>Domain-specific knowledge is only applicable to one specific application or domain.</li>
+        <li value="a fact"><think><set name="topic">a fact</set></think>A fact is a statement which asserts that a relationship holds for an object-subject pair.</li>
+        <li value="a rule"><think><set name="topic">a rule</set></think>A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.</li>
+        <li value="a rule mybot"><srai>WHAT IS a rule</srai></li>
+        <li value="the way that aiml allows variables in its long-term knowledge"><think><set name="topic">aiml_variables</set></think>AIML has wildcards and srai for that purpose.</li>
+        <li value="the way aiml supports context during a conversation"><think><set name="topic">aiml_context</set></think>AIML supports context through the use of the that tag to refer to previous bot answers, and via setting variables such as topic.</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- Examples Based -->
+  <category>
+    <!-- handles "Give me an example of ..." type questions-->
+    <pattern>GIVE ME AN EXAMPLE OF *</pattern>
+    <template>
+      <!-- uses <think> and <set> tag to save example and topic as a variable -->
+      <think><set name="example"><lowercase><star/></lowercase></set></think>
+      <condition name="example">
+        <li value="long-term generic knowledge"><think><set name="topic">long-term generic knowledge</set></think>Generative AI frequently hallucinates and produces incorrect results.</li>
+        <li value="long-term domain-specific knowledge"><think><set name="topic">long-term domain-specific knowledge</set></think>The formal specification of a particular machine learning algorithm.</li>
+        <li value="short-term generic knowledge"><think><set name="topic">short-term generic knowledge</set></think>The date today is an example as it may be useful in different contexts but only lasts 24 hours.</li>
+        <li value="short-term domain-specific knowledge"><think><set name="topic">short-term domain-specific knowledge</set></think>The deadline for the submission of this portfolio.</li>
+        <li value="a fact"><think><set name="topic">a fact</set></think>Submissions for this module are run through automatic and effective plagiarism checks.</li>
+        <li value="a rule"><think><set name="topic">a rule</set></think>If submitsOthersWork(X) then commitsAssessmentOffence(X).</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- Context-Dependent questions -->
+  <category>
+    <pattern>WHY IS KNOWING THAT USEFUL</pattern>
+    <!-- uses <that> tag to give context aware answers depending on previous reply-->
+    <that>*</that>
+    <template>
+      <condition name="topic">
+        <li value="a fact">To remind you that we take assessment offences very seriously.</li>
+        <li value="aiml_variables">Because it allows us to make statements that apply to classes of things or questions.</li>
+        <li value="aiml_context">Because some words like that and it can only be understood in the context of previous sentences.</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- MYBOT questions -->
+  <!-- uses <srai> tag to redirect similar question back to main "WHAT IS A RULE" question-->
+  <category>
+    <pattern>MYBOT *</pattern>
+    <template><srai>WHAT IS A RULE</srai></template>
+  </category>
+  <category>
+    <pattern>* MYBOT *</pattern>
+    <template><srai>WHAT IS A RULE</srai></template>
+  </category>
+
+  <!-- Synonyms for "What is ..." questions -->
+  <!-- uses <srai> tag to redirect similar question back to main question-->
+  <category>
+    <pattern>GIVE ME A DEFINITION OF *</pattern>
+    <template><srai>WHAT IS <star/></srai></template>
+  </category>
+
+  <category>
+    <pattern>TELL ME ABOUT *</pattern>
+    <template><srai>WHAT IS <star/></srai></template>
+  </category>
+
+  <!-- Synonyms for "Example based" questions -->
+  <!-- uses <srai> tag to redirect similar question back to main question-->
+  <category>
+    <pattern>ILLUSTRATE THE CONCEPT OF *</pattern>
+    <template><srai>GIVE ME AN EXAMPLE OF <star/></srai></template>
+  </category>
+
+  <category>
+    <pattern>* EXAMPLE OF *</pattern>
+    <template><srai>GIVE ME AN EXAMPLE OF <star index="2"/></srai></template>
+  </category>
+
+</aiml>
