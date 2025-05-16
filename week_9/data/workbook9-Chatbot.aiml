@@ -1,0 +1,21 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+<category>
+  <pattern>GREETINGS</pattern>
+  <template>Hello there!</template>
+</category>
+
+<!--
+anything between these two lines is a comment
+so this line is a comment too
+-->
+
+<!-- 
+ADD AT LEAST ONE NEW CATEGORY BELOW THIS COMMENT
+-->
+<category>
+  <pattern>HOW ARE YOU</pattern>
+  <template>I'm doing well, thanks for asking!</template>
+</category>
+
+</aiml>
